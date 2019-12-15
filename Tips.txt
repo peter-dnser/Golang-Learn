@@ -62,3 +62,21 @@ type Stringer interface {
 if sv, ok := v.(Stringer); ok {
     fmt.Printf("v implements String(): %s\n", sv.String()) // note: sv, not v
 }
+
+15 并发/并行的简述
+并发编程（Concurrent programming），代表程序的不同部分相互独立的执行，而 并行编程（parallel programming）代表程序不同部分于同时执行
+
+16 Channel转递时是值传递还是引用传递，需要实现什么interface？
+Channel是值传递，负责当前的要传输的值的Clone
+
+17 切片和数组的区别？
+   数组是固定的长度的，有边界检查，是在编译期间根据地址偏移做的检查。
+   切片底层是以数组+Len+Cap来构成的，切片可以动态扩容
+
+18 切片追加的两种返回方式不同点？
+    Golang底层优化了追加的方式，区别是复用旧的变量。
+
+19 切片的扩容方案？
+    如果期望容量大于当前容量的两倍就会使用期望容量；
+    如果当前切片容量小于 1024 就会将容量翻倍；
+    如果当前切片容量大于 1024 就会每次增加 25% 的容量，直到新容量大于期望容量
